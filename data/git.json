@@ -1,0 +1,40 @@
+{
+    "name": "git",
+    "description": "Sistema di controllo versione distribuito",
+    "nodes": [
+        { "id": "git", "label": "git", "type": "command", "syntax": "git [opzioni] <comando> [args]", "description": "Il sistema di controllo versione distribuito stupido." },
+        { "id": "git.clone", "label": "clone", "type": "subcommand", "syntax": "git clone <repo> [dir]", "description": "Clona un repository in una nuova cartella." },
+        { "id": "git.clone.repo", "label": "<repo>", "type": "placeholder", "syntax": "<repo>", "description": "URL o percorso del repository da clonare." },
+        { "id": "git.clone.dir", "label": "[dir]", "type": "placeholder", "syntax": "[dir]", "description": "Cartella di destinazione (opzionale)." },
+
+        { "id": "git.commit", "label": "commit", "type": "subcommand", "syntax": "git commit [-m <msg>] [-a]", "description": "Registra le modifiche nel repository." },
+        { "id": "git.commit.m", "label": "-m", "type": "option", "syntax": "-m <msg>", "description": "Usa <msg> come messaggio di commit." },
+        { "id": "git.commit.m.msg", "label": "<msg>", "type": "placeholder", "syntax": "<msg>", "description": "Testo del messaggio di commit." },
+        { "id": "git.commit.a", "label": "-a", "type": "option", "syntax": "-a", "description": "Aggiunge automaticamente i file modificati e tracciati." },
+
+        { "id": "git.push", "label": "push", "type": "subcommand", "syntax": "git push [remote] [branch]", "description": "Aggiorna i riferimenti remoti insieme agli oggetti associati." },
+        { "id": "git.push.remote", "label": "[remote]", "type": "placeholder", "syntax": "[remote]", "description": "Nome del remote, es. origin." },
+        { "id": "git.push.branch", "label": "[branch]", "type": "placeholder", "syntax": "[branch]", "description": "Nome del branch da inviare." },
+
+        { "id": "git.remote", "label": "remote", "type": "subcommand", "syntax": "git remote <add|remove> ...", "description": "Gestisce l'insieme dei repository monitorati." },
+        { "id": "git.remote.add", "label": "add", "type": "subcommand", "syntax": "git remote add <name> <url>", "description": "Aggiunge un nuovo remote." },
+        { "id": "git.remote.add.name", "label": "<name>", "type": "placeholder", "syntax": "<name>", "description": "Nome del remote." },
+        { "id": "git.remote.add.url", "label": "<url>", "type": "placeholder", "syntax": "<url>", "description": "URL del remote." }
+    ],
+    "edges": [
+        { "source": "git", "target": "git.clone" },
+        { "source": "git.clone", "target": "git.clone.repo" },
+        { "source": "git.clone", "target": "git.clone.dir" },
+        { "source": "git", "target": "git.commit" },
+        { "source": "git.commit", "target": "git.commit.m" },
+        { "source": "git.commit.m", "target": "git.commit.m.msg" },
+        { "source": "git.commit", "target": "git.commit.a" },
+        { "source": "git", "target": "git.push" },
+        { "source": "git.push", "target": "git.push.remote" },
+        { "source": "git.push", "target": "git.push.branch" },
+        { "source": "git", "target": "git.remote" },
+        { "source": "git.remote", "target": "git.remote.add" },
+        { "source": "git.remote.add", "target": "git.remote.add.name" },
+        { "source": "git.remote.add", "target": "git.remote.add.url" }
+    ]
+}

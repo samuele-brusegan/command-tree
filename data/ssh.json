@@ -1,0 +1,23 @@
+{
+    "name": "ssh",
+    "description": "Client per connessioni remote sicure (OpenSSH)",
+    "nodes": [
+        { "id": "ssh", "label": "ssh", "type": "command", "syntax": "ssh [opzioni] [user@]host [comando]", "description": "Programma per accedere a una macchina remota ed eseguire comandi." },
+        { "id": "ssh.target", "label": "[user@]<host>", "type": "placeholder", "syntax": "[user@]<host>", "description": "Utente e host di destinazione, es. root@192.168.1.10." },
+        { "id": "ssh.p", "label": "-p", "type": "option", "syntax": "-p <porta>", "description": "Porta a cui connettersi sull'host remoto." },
+        { "id": "ssh.p.port", "label": "<porta>", "type": "placeholder", "syntax": "<porta>", "description": "Numero di porta (default 22)." },
+        { "id": "ssh.i", "label": "-i", "type": "option", "syntax": "-i <identity_file>", "description": "File della chiave privata per l'autenticazione." },
+        { "id": "ssh.i.file", "label": "<identity_file>", "type": "placeholder", "syntax": "<identity_file>", "description": "Percorso alla chiave privata, es. ~/.ssh/id_ed25519." },
+        { "id": "ssh.L", "label": "-L", "type": "option", "syntax": "-L <local>:<host>:<hostport>", "description": "Inoltro di porta locale (tunnel)." },
+        { "id": "ssh.cmd", "label": "[comando]", "type": "placeholder", "syntax": "[comando]", "description": "Comando da eseguire sull'host remoto invece di una shell." }
+    ],
+    "edges": [
+        { "source": "ssh", "target": "ssh.target" },
+        { "source": "ssh", "target": "ssh.p" },
+        { "source": "ssh.p", "target": "ssh.p.port" },
+        { "source": "ssh", "target": "ssh.i" },
+        { "source": "ssh.i", "target": "ssh.i.file" },
+        { "source": "ssh", "target": "ssh.L" },
+        { "source": "ssh", "target": "ssh.cmd" }
+    ]
+}

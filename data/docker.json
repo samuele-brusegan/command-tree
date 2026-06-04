@@ -1,0 +1,29 @@
+{
+    "name": "docker",
+    "description": "Gestione di container e immagini",
+    "nodes": [
+        { "id": "docker", "label": "docker", "type": "command", "syntax": "docker <comando> [opzioni]", "description": "Client per la gestione di container, immagini, reti e volumi." },
+        { "id": "docker.run", "label": "run", "type": "subcommand", "syntax": "docker run [opzioni] <immagine> [cmd]", "description": "Crea e avvia un nuovo container da un'immagine." },
+        { "id": "docker.run.d", "label": "-d", "type": "option", "syntax": "-d", "description": "Esegue il container in background (detached)." },
+        { "id": "docker.run.p", "label": "-p", "type": "option", "syntax": "-p <host>:<container>", "description": "Mappa una porta dell'host su una del container." },
+        { "id": "docker.run.image", "label": "<immagine>", "type": "placeholder", "syntax": "<immagine>", "description": "Nome dell'immagine, es. nginx:latest." },
+
+        { "id": "docker.ps", "label": "ps", "type": "subcommand", "syntax": "docker ps [-a]", "description": "Elenca i container." },
+        { "id": "docker.ps.a", "label": "-a", "type": "option", "syntax": "-a", "description": "Mostra tutti i container, anche quelli fermi." },
+
+        { "id": "docker.build", "label": "build", "type": "subcommand", "syntax": "docker build -t <tag> <path>", "description": "Costruisce un'immagine da un Dockerfile." },
+        { "id": "docker.build.t", "label": "-t", "type": "option", "syntax": "-t <tag>", "description": "Assegna un nome e tag all'immagine." },
+        { "id": "docker.build.path", "label": "<path>", "type": "placeholder", "syntax": "<path>", "description": "Contesto di build (cartella col Dockerfile)." }
+    ],
+    "edges": [
+        { "source": "docker", "target": "docker.run" },
+        { "source": "docker.run", "target": "docker.run.d" },
+        { "source": "docker.run", "target": "docker.run.p" },
+        { "source": "docker.run", "target": "docker.run.image" },
+        { "source": "docker", "target": "docker.ps" },
+        { "source": "docker.ps", "target": "docker.ps.a" },
+        { "source": "docker", "target": "docker.build" },
+        { "source": "docker.build", "target": "docker.build.t" },
+        { "source": "docker.build", "target": "docker.build.path" }
+    ]
+}
